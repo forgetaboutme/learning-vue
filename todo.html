@@ -1,47 +1,83 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Todo app</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-</head>
-<body>
-  <div id="app">
-    <label>
-      Add a todo:
-      <input v-model="newTodo"
-      @keyup.enter="addNewTodo">
-    </input>
-  </label>
-  <ul>
-    <li v-for="todo in todos">
-      {{ todo.title }}
-    </li>
-  </ul>
-</div>
-</body>
-<script>
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <title>Todo app</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div id="app">
+      <div class="card" style="width: 18rem;">
+        <h5 class="card-header">
+          Todo App
+        </h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item list-group-item-light"># of completed Todos: {{ todos.filter(todo => {return todo.completed === true}).length }}</li>
+        </ul>
+        <div class="card-header">
+          Completed Todos:
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" v-for="todo in todos" :key="todo.id" v-if="todo.completed===true">
+            {{ todo.title }}
+            <span v-on:click="deleteTodo(todo)"><i class="fas fa-trash"></i></span>
+          </li>
+        </ul>
+        <div class="card-header">
+          Not yet completed Todos:
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" v-for="todo in todos" :key="todo.id" v-if="todo.completed===false">
+            {{ todo.title }}
+            <span v-on:click="completeTodo(todo)"><i class="fas fa-check"></i></span>
+            <span v-on:click="deleteTodo(todo)"><i class="fas fa-trash"></i></span>
+          </li>
+          <li class="list-group-item">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Add a new todo item" aria-label="Username" aria-describedby="basic-addon1" v-model="newTodo"
+              @keyup.enter="addTodo">
+              </input>
+            </div>
+          </li>
+        </ul>
+      </div>
+  </div>
+  </body>
+  <script>
 
-var vm = new Vue({
-  el: "#app",
-  data: {
-    todos: [],
-    newTodo: ''
-  },
-  methods: {
-    addNewTodo: function() {
-      var value = this.newTodo
-      if (!value) {
-        return
+  var id = 0
+
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      todos: [],
+      newTodo: ''
+    },
+    methods: {
+      addTodo: function() {
+        var value = this.newTodo
+        if (!value) {
+          return
+        }
+        this.todos.push({
+          title: value,
+          completed: false,
+          id: id++
+        })
+        this.newTodo = ''
+      },
+      deleteTodo(todo) {
+        const todoIndex = this.todos.indexOf(todo);
+        this.todos.splice(todoIndex, 1);
+      },
+      completeTodo(todo) {
+        const todoIndex = this.todos.indexOf(todo);
+        this.todos[todoIndex].completed = true
       }
-      this.todos.push({
-        title: value,
-        completed: false
-      })
-      this.newTodo = ''
     }
-  }
-})
+  })
 
-</script>
-</html>
+  </script>
+  </html>
