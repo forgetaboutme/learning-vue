@@ -1,15 +1,18 @@
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Todo app</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  </head>
-  <body>
-    <div id="app">
-      <div class="card" style="width: 18rem;">
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Todo app</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+  <div id="app">
+    <div class="container d-flex h-100">
+      <div class="card mx-auto align-self-center" style="width: 18rem;">
         <h5 class="card-header">
           Todo App
         </h5>
@@ -36,17 +39,16 @@
           </li>
           <li class="list-group-item">
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Add a new todo item" aria-label="Username" aria-describedby="basic-addon1" v-model="newTodo"
-              @keyup.enter="addTodo">
+              <input type="text" class="form-control" placeholder="Add a new todo item" aria-label="Username" aria-describedby="basic-addon1" v-model="newTodo" @keyup.enter="addTodo">
               </input>
             </div>
           </li>
         </ul>
       </div>
+    </div>
   </div>
-  </body>
-  <script>
-
+</body>
+<script>
   var id = 0
 
   var vm = new Vue({
@@ -78,6 +80,6 @@
       }
     }
   })
+</script>
 
-  </script>
-  </html>
+</html>
